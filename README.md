@@ -55,9 +55,9 @@ docker system prune --all --force
 ## troubleshooting
 Make sure port forwarding is configured in NAT router.
 I prefer upper ranges such as 50000-60000 for obfuscation reasons.
-```
-Name	Direction	Dst. IP	        Protocol	Public Port	Private Port		
-deluge	wan to lan	192.168.1.249	tcpudp	    56881	    56881			
-openvpn	wan to lan	192.168.1.249	udp	        51194	    51194			
-plex	wan to lan	192.168.1.249	tcp	        52400       32400			
-```
+
+| Name    | Direction  | Dst. IP       | Protocol | Public Port | Private Port |
+|---------|------------|---------------|----------|-------------|--------------|
+| deluge  | wan to lan | 192.168.1.249 | tcp udp  | 56881       | 56881        |
+| openvpn | wan to lan | 192.168.1.249 | udp      | 51194       | 51194        |
+| plex    | wan to lan | 192.168.1.249 | tcp      | 52400       | 32400        |
