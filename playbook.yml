@@ -90,7 +90,7 @@
       community.docker.docker_container:
         name: openvpn
         image: vahidshirvani/openvpn-install
-        cpus: 1
+        cpus: 2
         memory: 512M
         capabilities:
           - NET_ADMIN
@@ -120,7 +120,7 @@
       community.docker.docker_container:
         name: deluge
         image: linuxserver/deluge
-        cpus: 1
+        cpus: 2
         memory: 512M
         env:
           PUID: "1000"
@@ -146,7 +146,7 @@
       community.docker.docker_container:
         name: rar2fs
         image: zimme/rar2fs
-        cpus: 1
+        cpus: 2
         memory: 512M
         capabilities:
           - MKNOD
@@ -172,7 +172,7 @@
       community.docker.docker_container:
         name: plex
         image: linuxserver/plex
-        cpus: 1
+        cpus: 2
         memory: 512M
         env:
           PUID: "1000"
