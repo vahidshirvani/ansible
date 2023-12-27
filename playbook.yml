@@ -111,27 +111,27 @@
         restart_policy: unless-stopped
         state: started
 
-    - name: Pull deluge docker image
+    - name: Pull qbittorrent docker image
       community.docker.docker_image:
-        name: linuxserver/deluge
+        name: linuxserver/qbittorrent
         source: pull
 
-    - name: Create deluge container
+    - name: Create qbittorrent container
       community.docker.docker_container:
-        name: deluge
-        image: linuxserver/deluge
+        name: qbittorrent
+        image: linuxserver/qbittorrent
         cpus: 2
         memory: 512M
         env:
           PUID: "1000"
           PGID: "1000"
           TZ: Etc/UTC
-          DELUGE_LOGLEVEL: error
+          WEBUI_PORT: "8080"
         volumes:
-          - /home/ubuntu/.containers/deluge/config:/config
+          - /home/ubuntu/.containers/qbittorrent/config:/config
           - /home/ubuntu/.containers/shared/source:/source
         ports:
-          - 8112:8112
+          - 8080:8080
           - 56881:56881
           - 56881:56881/udp
         restart_policy: unless-stopped

@@ -2,7 +2,7 @@
 Setup remote server with ansible for running containerized docker apps. 
 Running services are:
 * openvpn
-* deluge
+* qbittorrent
 * rar2fs
 * plex
 
@@ -38,7 +38,7 @@ Run these manually beforehand so that ansible can execute faster
 sudo apt -y update
 sudo apt -y dist-upgrade
 sudo apt -y upgrade
-docker pull linuxserver/deluge
+docker pull linuxserver/qbittorrent
 docker pull vahidshirvani/openvpn-install
 docker pull linuxserver/plex
 docker pull zimme/rar2fs
@@ -56,8 +56,8 @@ docker system prune --all --force
 Make sure port forwarding is configured in NAT router.
 I prefer upper ranges such as 50000-60000 for obfuscation reasons.
 
-| Name    | Direction  | Dst. IP       | Protocol | Public Port | Private Port |
-|---------|------------|---------------|----------|-------------|--------------|
-| deluge  | wan to lan | 192.168.1.249 | tcp udp  | 56881       | 56881        |
-| openvpn | wan to lan | 192.168.1.249 | udp      | 51194       | 51194        |
-| plex    | wan to lan | 192.168.1.249 | tcp      | 52400       | 32400        |
+| Name        | Direction  | Dst. IP       | Protocol | Public Port | Private Port |
+|-------------|------------|---------------|----------|-------------|--------------|
+| qbittorrent | wan to lan | 192.168.1.249 | tcp udp  | 56881       | 56881        |
+| openvpn     | wan to lan | 192.168.1.249 | udp      | 51194       | 51194        |
+| plex        | wan to lan | 192.168.1.249 | tcp      | 52400       | 32400        |
