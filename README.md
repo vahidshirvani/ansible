@@ -2,6 +2,7 @@
 Setup remote server with ansible for running containerized docker apps. 
 Running services are:
 * openvpn
+* wireguard
 * qbittorrent
 * rar2fs
 * plex
@@ -40,6 +41,7 @@ sudo apt -y dist-upgrade
 sudo apt -y upgrade
 docker pull linuxserver/qbittorrent
 docker pull vahidshirvani/openvpn-install
+docker pull ghcr.io/wg-easy/wg-easy
 docker pull linuxserver/plex
 docker pull zimme/rar2fs
 ```
@@ -60,4 +62,5 @@ I prefer upper ranges such as 50000-60000 for obfuscation reasons.
 |-------------|------------|---------------|----------|-------------|--------------|
 | qbittorrent | wan to lan | 192.168.1.249 | tcp udp  | 56881       | 56881        |
 | openvpn     | wan to lan | 192.168.1.249 | udp      | 51194       | 51194        |
+| wireguard   | wan to lan | 192.168.1.249 | udp      | 51820       | 51820        |
 | plex        | wan to lan | 192.168.1.249 | tcp      | 52400       | 32400        |
