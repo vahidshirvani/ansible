@@ -72,8 +72,8 @@
       community.docker.docker_container:
         name: wg-easy
         image: ghcr.io/wg-easy/wg-easy
-        cpus: 2
-        memory: 512M
+        cpus: 4
+        memory: 2G
         capabilities:
           - NET_ADMIN
           - SYS_MODULE
@@ -100,8 +100,8 @@
       community.docker.docker_container:
         name: qbittorrent
         image: linuxserver/qbittorrent
-        cpus: 2
-        memory: 512M
+        cpus: 4
+        memory: 2G
         env:
           PUID: "1000"
           PGID: "1000"
@@ -126,8 +126,8 @@
       community.docker.docker_container:
         name: rar2fs
         image: zimme/rar2fs
-        cpus: 2
-        memory: 512M
+        cpus: 4
+        memory: 2G
         capabilities:
           - MKNOD
           - SYS_ADMIN
@@ -152,8 +152,8 @@
       community.docker.docker_container:
         name: plex
         image: linuxserver/plex
-        cpus: 2
-        memory: 512M
+        cpus: 4
+        memory: 2G
         env:
           PUID: "1000"
           PGID: "1000"
