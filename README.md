@@ -1,25 +1,17 @@
 # ansible
 Setup remote server with ansible for running containerized docker apps. 
 Running services are:
-* openvpn
 * wireguard
 * qbittorrent
 * rar2fs
 * plex
-* jellyfin
-
-## specs
-Raspberry Pi 3
-* CPU: ARM64
-* MEM: 1GB
-* OS: Ubuntu 22.04 LTS
 
 ## prerequisite
 Make sure you can `ssh` into the remote machine. 
 Preferably passwordless.
 ```bash
-ssh ubuntu@192.168.1.249
-ssh-copy-id ubuntu@192.168.1.249
+ssh ubuntu@192.168.1.149
+ssh-copy-id ubuntu@192.168.1.149
 ```
 Make sure you have ansible installed and that remote machine can be pinged.
 ```bash
@@ -41,10 +33,8 @@ sudo apt -y update
 sudo apt -y dist-upgrade
 sudo apt -y upgrade
 docker pull linuxserver/qbittorrent
-docker pull vahidshirvani/openvpn-install
 docker pull ghcr.io/wg-easy/wg-easy
 docker pull linuxserver/plex
-docker pull jellyfin/jellyfin
 docker pull zimme/rar2fs
 ```
 
@@ -63,7 +53,5 @@ I prefer upper ranges such as 50000-60000 for obfuscation reasons.
 | Name        | Direction  | Dst. IP       | Protocol | Public Port | Private Port |
 |-------------|------------|---------------|----------|-------------|--------------|
 | qbittorrent | wan to lan | 192.168.1.249 | tcp udp  | 56881       | 56881        |
-| openvpn     | wan to lan | 192.168.1.249 | udp      | 51194       | 51194        |
 | wireguard   | wan to lan | 192.168.1.249 | udp      | 51820       | 51820        |
 | plex        | wan to lan | 192.168.1.249 | tcp      | 52400       | 32400        |
-| jellyfin    | wan to lan | 192.168.1.249 | tcp      | 8096        | 8096         |

@@ -29,26 +29,8 @@
           - virtualenv
           - python3-setuptools
           - htop
-          - dphys-swapfile
         state: latest
         update_cache: true
-
-    - name: Set swap size
-      lineinfile:
-        path: /etc/dphys-swapfile
-        regexp: '^CONF_SWAPSIZE='
-        line: CONF_SWAPSIZE=1024
-
-    - name: Create swap file
-      command:
-        cmd: dphys-swapfile setup
-      register: swap_setup
-      changed_when: "'generating swapfile' in swap_setup.stdout"
-
-    - name: Activate swap
-      command:
-        cmd: dphys-swapfile swapon
-      changed_when: false
 
     - name: Add Docker GPG apt Key
       apt_key:
@@ -80,36 +62,6 @@
     - name: Install Docker Module for Python
       pip:
         name: docker
-
-    - name: Pull openvpn docker image
-      community.docker.docker_image:
-        name: vahidshirvani/openvpn-install
-        source: pull
-
-    - name: Create openvpn container
-      community.docker.docker_container:
-        name: openvpn
-        image: vahidshirvani/openvpn-install
-        cpus: 2
-        memory: 512M
-        capabilities:
-          - NET_ADMIN
-        devices:
-          - /dev/net/tun
-        env:
-          PORT: "51194"
-          PROTOCOL_CHOICE: "1"
-          ENDPOINT: my-server.com
-        volumes:
-          - /home/ubuntu/.containers/openvpn/etc/openvpn:/etc/openvpn
-          - /home/ubuntu/.containers/openvpn/etc/unbound:/etc/unbound
-          - /home/ubuntu/.containers/openvpn/etc/iptables:/etc/iptables
-          - /home/ubuntu/.containers/openvpn/var/log/openvpn:/var/log/openvpn
-          - /home/ubuntu/.containers/openvpn/root:/root
-        ports:
-          - 51194:51194/udp
-        restart_policy: unless-stopped
-        state: started
 
     - name: Pull wg-easy docker image
       community.docker.docker_image:
@@ -213,26 +165,5 @@
           - /home/ubuntu/.containers/shared/destination:/destination
         ports:
           - 32400:32400
-        restart_policy: unless-stopped
-        state: started
-
-    - name: Pull jellyfin docker image
-      community.docker.docker_image:
-        name: jellyfin/jellyfin
-        source: pull
-
-    - name: Create jellyfin container
-      community.docker.docker_container:
-        name: jellyfin
-        image: jellyfin/jellyfin
-        cpus: 2
-        memory: 512M
-        user: "1000:1000"
-        volumes:
-          - /home/ubuntu/.containers/jellyfin/config:/config
-          - /home/ubuntu/.containers/jellyfin/cache:/cache
-          - /home/ubuntu/.containers/shared/destination:/destination
-        ports:
-          - 8096:8096
         restart_policy: unless-stopped
         state: started
