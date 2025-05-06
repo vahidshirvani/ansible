@@ -143,27 +143,23 @@
         restart_policy: unless-stopped
         state: started
 
-    - name: Pull plex docker image
+    - name: Pull jellyfin docker image
       community.docker.docker_image:
-        name: linuxserver/plex
+        name: jellyfin/jellyfin
         source: pull
 
-    - name: Create plex container
+    - name: Create jellyfin container
       community.docker.docker_container:
-        name: plex
-        image: linuxserver/plex
-        cpus: 4
-        memory: 2G
-        env:
-          PUID: "1000"
-          PGID: "1000"
-          TZ: Etc/UTC
-          VERSION: docker
-          PLEX_CLAIM: claim-token-expired
+        name: jellyfin
+        image: jellyfin/jellyfin
+        cpus: 2
+        memory: 512M
+        user: "1000:1000"
         volumes:
-          - /home/ubuntu/.containers/plex/config:/config
+          - /home/ubuntu/.containers/jellyfin/config:/config
+          - /home/ubuntu/.containers/jellyfin/cache:/cache
           - /home/ubuntu/.containers/shared/destination:/destination
         ports:
-          - 32400:32400
+          - 8096:8096
         restart_policy: unless-stopped
         state: started
