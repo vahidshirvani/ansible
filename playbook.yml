@@ -152,8 +152,8 @@
       community.docker.docker_container:
         name: jellyfin
         image: jellyfin/jellyfin
-        cpus: 2
-        memory: 512M
+        cpus: 4
+        memory: 2G
         user: "1000:1000"
         volumes:
           - /home/ubuntu/.containers/jellyfin/config:/config
@@ -161,5 +161,29 @@
           - /home/ubuntu/.containers/shared/destination:/destination
         ports:
           - 8096:8096
+        restart_policy: unless-stopped
+        state: started
+
+    - name: Pull minecraft docker image
+      community.docker.docker_image:
+        name: itzg/minecraft-bedrock-server
+        source: pull
+
+    - name: Create minecraft container
+      community.docker.docker_container:
+        name: minecraft
+        image: itzg/minecraft-bedrock-server
+        cpus: 4
+        memory: 2G
+        user: "1000:1000"
+        interactive: true
+        tty: true
+        env:
+          EULA: "TRUE"
+          DIFFICULTY: normal
+        volumes:
+          - /home/ubuntu/.containers/minecraft/data:/data
+        ports:
+          - 19132:19132/udp
         restart_policy: unless-stopped
         state: started

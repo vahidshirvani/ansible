@@ -55,3 +55,4 @@ I prefer upper ranges such as 50000-60000 for obfuscation reasons.
 | qbittorrent | wan to lan | 192.168.1.249 | tcp udp  | 56881       | 56881        |
 | wireguard   | wan to lan | 192.168.1.249 | udp      | 51820       | 51820        |
 | jellyfin    | wan to lan | 192.168.1.249 | tcp      | 8096        | 8096         |
+| minecraft   | wan to lan | 192.168.1.249 | udp      | -           | 19132        |
